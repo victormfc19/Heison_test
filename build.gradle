@@ -5,6 +5,7 @@ plugins {
 group 'org.example'
 version '1.0-SNAPSHOT'
 
+
 repositories {
     mavenCentral()
 }
@@ -21,3 +22,14 @@ dependencies {
 
     implementation 'net.serenity-bdd:serenity-ensure:2.1.10'
 }
+
+task runTests(type: Test){
+    include '**/**Runners.*'
+}
+
+task tests(type: Test){
+    systemProperty 'email.employee', System.getProperty('email.employee')
+    systemProperty 'password.employee', System.getProperty('password.employee')
+}
+
+

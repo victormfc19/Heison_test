@@ -11,11 +11,15 @@ import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 import net.thucydides.core.annotations.Managed;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import static net.serenitybdd.screenplay.actors.OnStage.*;
 
 public class LoginStepDefinition {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginStepDefinition.class);
 
     @Managed
     private WebDriver hisBrowser;
@@ -29,15 +33,18 @@ public class LoginStepDefinition {
 
     @Given("^the employee opens the web page$")
     public void theEmployeeOpensTheWebPage() {
-        theActorInTheSpotlight().wasAbleTo(
-                Navigate.theHeisonPage(),
-                Login.inTheApp(withEmployeeCalled().victor())
-        );
+        String email = System.getProperty("email.employee");
+        String pass = System.getProperty("passord.employee");
+
+        LOGGER.info("El email ingresado es: " + email);
+        LOGGER.info("La contraseña ingresada es: "+ pass);
+
+        theActorInTheSpotlight().wasAbleTo(Navigate.theHeisonPage());
     }
 
     @When("^he enter your credentials$")
     public void heEnterYourCredentials() {
-
+        theActorInTheSpotlight().attemptsTo(Login.inTheApp(withEmployeeCalled().victor()));
     }
 
     @Then("^he should see the main page$")
