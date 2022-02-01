@@ -33,12 +33,6 @@ public class LoginStepDefinition {
 
     @Given("^the employee opens the web page$")
     public void theEmployeeOpensTheWebPage() {
-        String email = System.getProperty("email.employee");
-        String pass = System.getProperty("passord.employee");
-
-        LOGGER.info("El email ingresado es: " + email);
-        LOGGER.info("La contraseña ingresada es: "+ pass);
-
         theActorInTheSpotlight().wasAbleTo(Navigate.theHeisonPage());
     }
 
